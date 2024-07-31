@@ -7,14 +7,14 @@ import product6 from "./assests/products/6.webp";
 import product7 from "./assests/products/7.webp";
 import product8 from "./assests/products/8.webp";
 
-interface item{
+interface Item{
   id:number,
   productName:string,
   price:number,
   productImage:string
 }
 
-export const PRODUCTS:item[] = [
+export const PRODUCTS:Item[] = [
     {
       id: 1,
       productName: "IPhone",
