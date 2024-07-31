@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { PRODUCTS } from '../products';
 
-interface Item{
+export interface Item{
     id:number,
     productName:string,
     price:number,
@@ -37,10 +37,10 @@ interface Props{
     children: React.ReactNode;
 }
 
+
 export const ShopContextProvider = (props:Props) => {
     // in here I can do the state stuff and create functions
-    const [items, setItem] = useState<Item[] | null>(null);
-    setItem(PRODUCTS);
+    const [items, setItem] = useState<Item[] | null>(PRODUCTS);
 
     const getDefaultCart = (): CartItems => {
         let cart:CartItems = {}
@@ -76,6 +76,8 @@ export const ShopContextProvider = (props:Props) => {
             }    
         });
     };
+
+    console.log(cartItems);
 
     return <ShopContext.Provider value={{items,cartItems,addToCart,removeFromCart}}> {props.children} </ShopContext.Provider>
 }

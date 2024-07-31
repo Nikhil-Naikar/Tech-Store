@@ -7,12 +7,8 @@ import product6 from "./assests/products/6.webp";
 import product7 from "./assests/products/7.webp";
 import product8 from "./assests/products/8.webp";
 
-interface Item{
-  id:number,
-  productName:string,
-  price:number,
-  productImage:string
-}
+import { Item } from './context/shop-context';
+
 
 export const PRODUCTS:Item[] = [
     {
