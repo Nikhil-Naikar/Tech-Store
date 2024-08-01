@@ -77,7 +77,5 @@ export const ShopContextProvider = (props:Props) => {
         });
     };
 
-    console.log(cartItems);
-
     return <ShopContext.Provider value={{items,cartItems,addToCart,removeFromCart}}> {props.children} </ShopContext.Provider>
 }

@@ -5,7 +5,9 @@ import { useContext } from 'react';
 
 export const Product = (data:Item) => {
     const {id, productName, price, productImage} = data; 
-    const {addToCart} = useContext(ShopContext);
+    const {cartItems, addToCart} = useContext(ShopContext);
+
+    const cartItemAmount = cartItems?.[id] ?? 0;
     return (
        <div className="product">
             <img src={productImage}/>
@@ -16,7 +18,7 @@ export const Product = (data:Item) => {
                 <p> ${price} </p>
             </div>
             <button className='addToCartBttn' onClick={() => {addToCart(id)}}>
-                Add To Chart
+                Add To Chart {cartItemAmount > 0 && <> ({cartItemAmount}) </>}
             </button>
        </div> 
     )
