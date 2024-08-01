@@ -18,7 +18,9 @@ interface ItemContextType{
     items: Item[] | null,
     cartItems: CartItems | null,
     addToCart: (itemId:number) => void,
-    removeFromCart: (itemId:number) => void
+    removeFromCart: (itemId:number) => void,
+    updateCartItemCount: (newAmount:number, itemId:number) => void,
+    getTotalCartAmount: () => number
 }
 
 // just an initial values for createContext
@@ -26,7 +28,9 @@ const contextInitialValues = {
     items: null,
     cartItems: null,
     addToCart: () => {},
-    removeFromCart: () => {}
+    removeFromCart: () => {},
+    updateCartItemCount: () => {},
+    getTotalCartAmount: () => 0
 }
 
 // set the type and give it initial values
@@ -77,5 +81,22 @@ export const ShopContextProvider = (props:Props) => {
         });
     };
 
-    return <ShopContext.Provider value={{items,cartItems,addToCart,removeFromCart}}> {props.children} </ShopContext.Provider>
+    const updateCartItemCount = (newAmount:number, itemId:number) => {
+        setCartItems((prev) => ({...prev, [itemId]: newAmount}))
+    }
+
+    const getTotalCartAmount = () => {
+        let totalAmount:number = 0;
+        for(const item in cartItems){
+            if(cartItems[Number(item)] > 0){
+                let itemInfo = items?.find((i) => i.id === Number(item));
+                if(itemInfo && itemInfo.price !== undefined){
+                    totalAmount += cartItems[Number(item)] * itemInfo.price;
+                }
+            }
+        }
+        return totalAmount;
+    }
+
+    return <ShopContext.Provider value={{items,cartItems,addToCart,removeFromCart, updateCartItemCount, getTotalCartAmount}}> {props.children} </ShopContext.Provider>
 }
